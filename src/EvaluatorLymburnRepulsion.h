@@ -11,7 +11,8 @@
 #include "hoomd/HOOMDMath.h"
 
 /*! \file LymburnRepulsion.h
-    \brief Defines the pair evaluator class for a long-ranged
+    \brief Defines the pair evaluator class for a long-ranged repulsion force ~1/r (potential:
+   ln(r)) with a cutoff
 */
 
 // need to declare these class methods with __device__ qualifiers when building in nvcc
@@ -37,7 +38,6 @@ class LymburnRepulsion
     struct param_type
         {
         Scalar strength; //!< Strength of the repulsion
-        Scalar r_cut;    //!< Cutoff distance
 
         DEVICE void load_shared(char*& ptr, unsigned int& available_bytes) { }
 
@@ -52,7 +52,7 @@ class LymburnRepulsion
 #endif
 
 #ifndef __HIPCC__
-        param_type() : strength(0), r_cut(0) { }
+        param_type() : strength(0) { }
 
         param_type(pybind11::dict v, bool managed = false)
             {
@@ -78,8 +78,8 @@ class LymburnRepulsion
         \param _rcutsq Squared distance at which the potential goes to 0
         \param _params Per type pair parameters of this potential
     */
-    DEVICE EvaluatorPairExample(Scalar _rsq, Scalar _rcutsq, const param_type& _params)
-        : rsq(_rsq), rcutsq(_rcutsq), strength(_params.strength), r_cut(_params.r_cut)
+    DEVICE LymburnRepulsion(Scalar _rsq, Scalar _rcutsq, const param_type& _params)
+        : rsq(_rsq), rcutsq(_rcutsq), strength(_params.strength)
         {
         }
 
@@ -151,10 +151,9 @@ class LymburnRepulsion
 #endif
 
     protected:
-    Scalar rsq;    //!< Stored rsq from the constructor
-    Scalar rcutsq; //!< Stored rcutsq from the constructor
-    Scalar k;      //!< Stored k from the constructor
-    Scalar sigma;  //!< Stored sigma from the constructor
+    Scalar rsq;      //!< Stored rsq from the constructor
+    Scalar rcutsq;   //!< Stored rcutsq from the constructor
+    Scalar strength; //!< Stored strength from the constructor
     };
 
     } // end namespace md

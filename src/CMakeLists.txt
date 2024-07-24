@@ -1,21 +1,21 @@
 set(COMPONENT_NAME resobee_hoomd_potentials)
 
 set(_${COMPONENT_NAME}_sources
-    module.cc
-    )
+        module.cc
+)
 
 set(_${COMPONENT_NAME}_cu_sources
         LymburnRepulsionGPUKernel.cu
-    )
+)
 
 set(python_files
-    __init__.py
-    version.py
-    pair.py
-    )
+        __init__.py
+        version.py
+        module.py
+)
 
 if (ENABLE_HIP)
-set(_cuda_sources ${_${COMPONENT_NAME}_cu_sources})
+    set(_cuda_sources ${_${COMPONENT_NAME}_cu_sources})
 endif (ENABLE_HIP)
 
 hoomd_add_module(_${COMPONENT_NAME} SHARED ${_${COMPONENT_NAME}_sources} ${_cuda_sources} NO_EXTRAS)
@@ -23,27 +23,27 @@ hoomd_add_module(_${COMPONENT_NAME} SHARED ${_${COMPONENT_NAME}_sources} ${_cuda
 add_library(HOOMD::_${COMPONENT_NAME} ALIAS _${COMPONENT_NAME})
 
 if (APPLE)
-set_target_properties(_${COMPONENT_NAME} PROPERTIES INSTALL_RPATH "@loader_path/..;@loader_path")
-else()
-set_target_properties(_${COMPONENT_NAME} PROPERTIES INSTALL_RPATH "\$ORIGIN/..;\$ORIGIN")
-endif()
+    set_target_properties(_${COMPONENT_NAME} PROPERTIES INSTALL_RPATH "@loader_path/..;@loader_path")
+else ()
+    set_target_properties(_${COMPONENT_NAME} PROPERTIES INSTALL_RPATH "\$ORIGIN/..;\$ORIGIN")
+endif ()
 
 # Link the library to its dependencies. Add or remove HOOMD extension modules (and/or external C++
 # libraries) as needed.
 target_link_libraries(_${COMPONENT_NAME}
-                      PUBLIC HOOMD::_hoomd
-                      PUBLIC HOOMD::_md
-                      )
+        PUBLIC HOOMD::_hoomd
+        PUBLIC HOOMD::_md
+)
 
 # Install the library.
 install(TARGETS _${COMPONENT_NAME}
         LIBRARY DESTINATION ${PYTHON_SITE_INSTALL_DIR}/${COMPONENT_NAME}
-        )
+)
 
 # Install the Python package.
 install(FILES ${python_files}
         DESTINATION ${PYTHON_SITE_INSTALL_DIR}/${COMPONENT_NAME}
-       )
+)
 
 # Copy the Python package to the build directory.
 copy_files_to_build("${python_files}" "hoomd-component-${COMPONENT_NAME}" "*.py")
