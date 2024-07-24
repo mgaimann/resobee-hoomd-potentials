@@ -11,7 +11,7 @@ set(_${COMPONENT_NAME}_cu_sources
 set(python_files
         __init__.py
         version.py
-        module.py
+        lymburn_repulsion.py
 )
 
 if (ENABLE_HIP)
