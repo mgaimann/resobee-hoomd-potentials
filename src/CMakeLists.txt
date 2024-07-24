@@ -1,19 +1,17 @@
-# TODO: Set COMPONENT_NAME to the name of your Python package.
-set(COMPONENT_NAME template)
+set(COMPONENT_NAME resobee_hoomd_potentials)
 
-# TODO: List all host C++ source code files in _${COMPONENT_NAME}_sources.
 set(_${COMPONENT_NAME}_sources
     module.cc
     )
 
-# TODO: List all GPU C++ source code files in _${COMPONENT_NAME}_cu_sources.
 set(_${COMPONENT_NAME}_cu_sources
+        LymburnRepulsionGPUKernel.cu
     )
 
-# TODO: List all Python modules in python_files.
 set(python_files
     __init__.py
     version.py
+    pair.py
     )
 
 if (ENABLE_HIP)
