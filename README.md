@@ -28,7 +28,3 @@ Once installed, the template is available for import via:
 ```
 import hoomd.resobee_hoomd_potentials
 ```
-
-
-
-
