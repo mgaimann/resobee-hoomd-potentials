@@ -4,4 +4,3 @@
 """Resobee HOOMD Potentials."""
 
 from . import version
-from ._resobee_hoomd_potentials import LymburnRepulsion

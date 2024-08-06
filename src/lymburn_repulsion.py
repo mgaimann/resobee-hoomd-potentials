@@ -9,14 +9,14 @@ from hoomd.data.typeparam import TypeParameter
 
 # Import the hoomd Python package and other necessary components.
 from hoomd.md import pair
-from hoomd.resobee_hoomd_potentials import _lymburn_repulsion
+from hoomd.resobee_hoomd_potentials import _resobee_hoomd_potentials
 
 
 class LymburnRepulsion(pair.Pair):
     """Long-range Lymburn repulsion ln(r) potential."""
 
     # set static class data
-    _ext_module = _lymburn_repulsion
+    _ext_module = _resobee_hoomd_potentials
     _cpp_class_name = 'LymburnRepulsion'
     _accepted_modes = ('none', 'shift', 'xplor')
 
