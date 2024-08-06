@@ -25,6 +25,6 @@ class LymburnRepulsion(pair.Pair):
     ):
         super().__init__(nlist, default_r_cut, default_r_on, mode)
         params = TypeParameter(
-            'params', 'particle_types', TypeParameterDict(strength=strength, len_keys=1)
+            'params', 'particle_types', TypeParameterDict(strength=float, len_keys=1)
         )
         self._add_typeparam(params)
