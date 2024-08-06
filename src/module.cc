@@ -17,10 +17,10 @@ namespace md
 
 PYBIND11_MODULE(_resobee_hoomd_potentials, m)
     {
-    detail::export_PotentialPair<LymburnRepulsion>(m, "LymburnRepulsion");
+    detail::export_PotentialPair<EvaluatorLymburnRepulsion>(m, "LymburnRepulsion");
 
 #ifdef ENABLE_HIP
-    detail::export_PotentialPairGPU<LymburnRepulsion>(m, "LymburnRepulsionGPU");
+    detail::export_PotentialPairGPU<EvaluatorLymburnRepulsion>(m, "LymburnRepulsionGPU");
 #endif
     }
 

@@ -10,7 +10,7 @@
 
 #include "hoomd/HOOMDMath.h"
 
-/*! \file LymburnRepulsion.h
+/*! \file EvaluatorLymburnRepulsion.h
     \brief Defines the pair evaluator class for a long-ranged repulsion force ~1/r (potential:
    ln(r)) with a cutoff
 */
@@ -31,7 +31,7 @@ namespace hoomd
 namespace md
     {
 
-class LymburnRepulsion
+class EvaluatorLymburnRepulsion
     {
     public:
     //! Define the parameter type used by this pair potential evaluator
@@ -78,7 +78,7 @@ class LymburnRepulsion
         \param _rcutsq Squared distance at which the potential goes to 0
         \param _params Per type pair parameters of this potential
     */
-    DEVICE LymburnRepulsion(Scalar _rsq, Scalar _rcutsq, const param_type& _params)
+    DEVICE EvaluatorLymburnRepulsion(Scalar _rsq, Scalar _rcutsq, const param_type& _params)
         : rsq(_rsq), rcutsq(_rcutsq), strength(_params.strength)
         {
         }
