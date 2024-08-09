@@ -2,5 +2,3 @@
 # Part of HOOMD-blue, released under the BSD 3-Clause License.
 
 """Resobee HOOMD Potentials."""
-
-from . import version
